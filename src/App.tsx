@@ -33,7 +33,7 @@ export default function App() {
                 const orgs = await getOrganisations(currentUser);
                 setOrganisation(orgs[0]);
                 // Ensure a book exists for this org before anything else can happen
-                await apiGet("jetlybooks/get_or_create_book.php", {
+                await apiGet("get_or_create_book.php", {
                     organisation_id: orgs[0].id,
                     user_id: currentUser.profile.sub,
                 });
