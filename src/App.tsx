@@ -33,7 +33,7 @@ export default function App() {
                 const orgs = await getOrganisations(currentUser);
                 setOrganisation(orgs[0]);
                 // Ensure a book exists for this org before anything else can happen
-                await apiGet("get_or_create_book.php", {
+                await apiGet("jetlybooks/get_or_create_book.php", {
                     organisation_id: orgs[0].id,
                     user_id: currentUser.profile.sub,
                 });
@@ -48,7 +48,7 @@ export default function App() {
         setLoadingInvoices(true);
         setLoadError(null);
         try {
-            const result = await apiGet("get_invoices.php", { organisation_id: organisation.id });
+            const result = await apiGet("jetlybooks/get_invoices.php", { organisation_id: organisation.id });
             if (result.success) {
                 setInvoices(result.invoices ?? []);
             } else {
