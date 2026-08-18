@@ -81,14 +81,14 @@ export default function App() {
                         <FileText className="w-6 h-6 text-gold" />
                     </div>
                     <div>
-                        <h1 className="text-xl font-display font-bold text-cream">JetLybooks</h1>
+                        <h1 className="text-xl font-display font-bold text-cream">Jetlybooks</h1>
                         <p className="text-cream/50 text-sm mt-1">
-                            Sign in with your JetDomains account — free, no separate signup.
+                            Sign in with your Jetdomains account — free, no separate signup.
                         </p>
                     </div>
                     <button
                         onClick={() => signIn()}
-                        className="w-full h-11 bg-gold text-navy font-medium rounded-lg hover:opacity-90 transition"
+                        className="w-full h-11 bg-royal text-white font-medium rounded-lg hover:opacity-90 transition"
                     >
                         Sign in
                     </button>
