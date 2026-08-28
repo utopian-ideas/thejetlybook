@@ -30,7 +30,7 @@ export default function NewInvoiceForm({ organisationId, userId, onBack, onCreat
         async function loadCustomers() {
             setLoadingCustomers(true);
             try {
-                const result = await apiGet("get_customers.php", { organisation_id: organisationId });
+                const result = await apiGet("jetlybooks/get_customers.php", { organisation_id: organisationId });
                 if (result.success) setCustomers(result.customers ?? []);
             } catch {
                 // Non-fatal — form still works with "new customer" only
@@ -65,7 +65,7 @@ export default function NewInvoiceForm({ organisationId, userId, onBack, onCreat
 
         setSaving(true);
         try {
-            const result = await apiPost("create_invoice.php", {
+            const result = await apiPost("jetlybooks/create_invoice.php", {
                 organisation_id: organisationId,
                 user_id: userId,
                 ...(selectedCustomerId === "new"
