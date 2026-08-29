@@ -51,7 +51,7 @@ export default function InvoiceDetail({ invoiceId, onBack }: {
 
     const subtotal = items.reduce((sum, i) => sum + i.unit_price * i.quantity, 0);
     const tax = invoice?.tax ?? 0;
-    const total = subtotal + tax;
+    const total = subtotal + Number(tax);
 
     function updateItem(index: number, field: keyof Item, value: string | number) {
         setItems(prev => prev.map((item, i) => i === index ? { ...item, [field]: value } : item));
