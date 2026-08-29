@@ -5,8 +5,9 @@ import { apiGet } from "./lib/api";
 import Callback from "./components/Callback";
 import InvoiceList from "./components/InvoiceList";
 import NewInvoiceForm from "./components/NewInvoiceForm";
+import InvoiceDetail from "./components/InvoiceDetail";
 
-type View = "list" | "new-invoice";
+type View = "list" | "new-invoice" | "detail";
 
 export default function App() {
     if (window.location.pathname === "/callback") {
@@ -19,6 +20,7 @@ export default function App() {
     const [organisation, setOrganisation] = useState<any>(null);
 
     const [view, setView] = useState<View>("list");
+    const [selectedInvoiceId, setSelectedInvoiceId] = useState<string | null>(null);
     const [invoices, setInvoices] = useState<any[]>([]);
     const [loadingInvoices, setLoadingInvoices] = useState(false);
     const [loadError, setLoadError] = useState<string | null>(null);
@@ -81,14 +83,14 @@ export default function App() {
                         <FileText className="w-6 h-6 text-gold" />
                     </div>
                     <div>
-                        <h1 className="text-xl font-display font-bold text-cream">Jetlybooks</h1>
+                        <h1 className="text-xl font-display font-bold text-cream">JetLybooks</h1>
                         <p className="text-cream/50 text-sm mt-1">
-                            Sign in with your Jetdomains account — free, no separate signup.
+                            Sign in with your JetDomains account — free, no separate signup.
                         </p>
                     </div>
                     <button
                         onClick={() => signIn()}
-                        className="w-full h-11 bg-royal text-white font-medium rounded-lg hover:opacity-90 transition"
+                        className="w-full h-11 bg-gold text-navy font-medium rounded-lg hover:opacity-90 transition"
                     >
                         Sign in
                     </button>
@@ -113,6 +115,10 @@ export default function App() {
                         loading={loadingInvoices}
                         error={loadError}
                         onNewInvoice={() => setView("new-invoice")}
+                        onSelectInvoice={(id) => {
+                            setSelectedInvoiceId(id);
+                            setView("detail");
+                        }}
                     />
                 )}
 
@@ -122,6 +128,16 @@ export default function App() {
                         userId={user.profile.sub}
                         onBack={() => setView("list")}
                         onCreated={() => {
+                            setView("list");
+                            loadInvoices();
+                        }}
+                    />
+                )}
+
+                {view === "detail" && selectedInvoiceId && (
+                    <InvoiceDetail
+                        invoiceId={selectedInvoiceId}
+                        onBack={() => {
                             setView("list");
                             loadInvoices();
                         }}

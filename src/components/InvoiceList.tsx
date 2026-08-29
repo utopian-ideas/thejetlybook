@@ -11,11 +11,12 @@ function formatRand(cents: number) {
     return `R${(cents / 100).toFixed(2)}`;
 }
 
-export default function InvoiceList({ invoices, loading, error, onNewInvoice }: {
+export default function InvoiceList({ invoices, loading, error, onNewInvoice, onSelectInvoice }: {
     invoices: any[];
     loading: boolean;
     error: string | null;
     onNewInvoice: () => void;
+    onSelectInvoice: (id: string) => void;
 }) {
     return (
         <div className="space-y-6">
@@ -48,7 +49,8 @@ export default function InvoiceList({ invoices, loading, error, onNewInvoice }: 
                     {invoices.map((invoice) => (
                         <li
                             key={invoice.id}
-                            className="border border-cream/10 rounded-lg p-4 bg-cream/5"
+                            onClick={() => onSelectInvoice(invoice.id)}
+                            className="border border-cream/10 rounded-lg p-4 bg-cream/5 cursor-pointer hover:border-gold/40 transition-colors"
                         >
                             <div className="flex items-center justify-between">
                                 <div>
